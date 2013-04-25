@@ -1,6 +1,0 @@
-
-JAVA_OPTS="\
-	-server \
-	-Xms500m \
-	-Xmx500m \
-"
