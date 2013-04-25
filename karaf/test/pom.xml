@@ -26,8 +26,9 @@
 
 	<modules>
 
-		<module>barchart-karaf-test-module1</module>
-		<module>barchart-karaf-test-app</module>
+		<module>app</module>
+		<module>module1</module>
+		<module>module2</module>
 
 	</modules>
 

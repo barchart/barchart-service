@@ -23,13 +23,13 @@
 		<dependency>
 			<groupId>com.barchart.conf</groupId>
 			<artifactId>barchart-conf-sync-api</artifactId>
-			<version>1.2.0-SNAPSHOT</version>
+			<version>1.2.1</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.barchart.conf</groupId>
 			<artifactId>barchart-conf-sync-impl</artifactId>
-			<version>1.2.0-SNAPSHOT</version>
+			<version>1.2.1</version>
 			<scope>provided</scope>
 		</dependency>
 
