@@ -28,7 +28,7 @@
 		<!-- Karaf base application to deploy -->
 		<karafGroup>com.barchart.karaf</karafGroup>
 		<karafArtifact>barchart-karaf-base-app</karafArtifact>
-		<karafVersion>1.2.10</karafVersion>
+		<karafVersion>1.2.12</karafVersion>
 		<karafClassifier>tanuki-distro</karafClassifier>
 		<karafType>zip</karafType>
 
