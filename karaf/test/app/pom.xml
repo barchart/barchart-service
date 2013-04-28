@@ -8,7 +8,7 @@
 	<parent>
 		<groupId>com.barchart.karaf</groupId>
 		<artifactId>barchart-karaf-base-app</artifactId>
-		<version>1.2.11-SNAPSHOT</version>
+		<version>1.2.13-SNAPSHOT</version>
 		<relativePath />
 	</parent>
 
