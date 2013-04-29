@@ -35,14 +35,14 @@
     "Mappings": {
     	
         "RegionImageMap": {
-            "ap-northeast-1": { "AMI": "ami-55b03454" },
-            "ap-southeast-1": { "AMI": "ami-782c612a" },
-            "ap-southeast-2": { "AMI": "ami-6078ee5a" },
-            "eu-west-1":      { "AMI": "ami-26414852" },
-            "sa-east-1":      { "AMI": "ami-69805b74" },
-            "us-east-1":      { "AMI": "ami-0f45d266" },
-            "us-west-1":      { "AMI": "ami-3cd8fb79" },
-            "us-west-2":      { "AMI": "ami-fe941ece" }
+            "ap-northeast-1": { "AMI": "ami-fc6ceefd" },
+            "ap-southeast-1": { "AMI": "ami-66084734" },
+            "ap-southeast-2": { "AMI": "ami-06ea7a3c" },
+            "eu-west-1":      { "AMI": "ami-c27b6fb6" },
+            "sa-east-1":      { "AMI": "ami-a1da00bc" },
+            "us-east-1":      { "AMI": "ami-def89fb7" },
+            "us-west-1":      { "AMI": "ami-fc002cb9" },
+            "us-west-2":      { "AMI": "ami-0ef96e3e" }
         }
     
     },

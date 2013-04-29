@@ -10,12 +10,12 @@ http://cloud-images.ubuntu.com/releases/precise/release/
 
 use only EBS
 
-Region	arch	root store	ami
-ap-northeast-1	32-bit	ebs	ami-55b03454
-ap-southeast-1	32-bit	ebs	ami-782c612a
-ap-southeast-2	32-bit	ebs	ami-6078ee5a
-eu-west-1	32-bit	ebs	ami-26414852
-sa-east-1	32-bit	ebs	ami-69805b74
-us-east-1	32-bit	ebs	ami-0f45d266
-us-west-1	32-bit	ebs	ami-3cd8fb79
-us-west-2	32-bit	ebs	ami-fe941ece
+Region 	arch 	root store 	ami 
+ap-northeast-1 	32-bit 	ebs 	ami-fc6ceefd 
+ap-southeast-1 	32-bit 	ebs 	ami-66084734 
+ap-southeast-2 	32-bit 	ebs 	ami-06ea7a3c 
+eu-west-1 	32-bit 	ebs 	ami-c27b6fb6 
+sa-east-1 	32-bit 	ebs 	ami-a1da00bc 
+us-east-1 	32-bit 	ebs 	ami-def89fb7 
+us-west-1 	32-bit 	ebs 	ami-fc002cb9 
+us-west-2 	32-bit 	ebs 	ami-0ef96e3e 
