@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <features xmlns="http://karaf.apache.org/xmlns/features/v1.2.0" name="barchart-conf-feature-remote">
-    <feature name="barchart-conf-feature-remote" version="1.3.0-SNAPSHOT" description="barchart-conf-feature-remote" install="auto">
+    <feature name="barchart-conf-feature-remote" version="1.3.0" description="barchart-conf-feature-remote" install="auto">
         <details>### barchart-conf-feature-remote
 
 Karaf feature for configuration management functions.</details>
@@ -9,10 +9,10 @@ Karaf feature for configuration management functions.</details>
         <bundle start-level="40">mvn:com.barchart.conf/barchart-conf-sync-api/1.2.0</bundle>
         <bundle start-level="40">mvn:com.barchart.conf/barchart-conf-id/1.1.7</bundle>
         <bundle start-level="40">mvn:com.typesafe/config/1.0.0</bundle>
-        <bundle start-level="40">mvn:com.barchart.conf/barchart-conf-sync-impl/1.3.0-SNAPSHOT</bundle>
+        <bundle start-level="40">mvn:com.barchart.conf/barchart-conf-sync-impl/1.3.0</bundle>
         <bundle start-level="40">mvn:com.barchart.conf/barchart-conf-event/1.0.6</bundle>
-        <bundle start-level="40">mvn:com.barchart.conf/barchart-conf-file/2.0.0-SNAPSHOT</bundle>
-        <bundle start-level="40">mvn:com.barchart.conf/barchart-conf-repo/1.2.0-SNAPSHOT</bundle>
+        <bundle start-level="40">mvn:com.barchart.conf/barchart-conf-file/2.0.0</bundle>
+        <bundle start-level="40">mvn:com.barchart.conf/barchart-conf-repo/1.2.0</bundle>
         <bundle start-level="40">mvn:com.barchart.conf/barchart-conf-list/1.0.5</bundle>
         <bundle start-level="40">mvn:com.barchart.conf/barchart-conf-util/1.2.2</bundle>
         <bundle start-level="40">mvn:com.barchart.wrap/barchart-wrap-jgit/2.3.1-build001</bundle>
