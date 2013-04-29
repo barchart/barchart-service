@@ -57,7 +57,7 @@ echo "### configure kernel"
 echo "###"
 
 cp --verbose --force $WORK/sysctl-karaf.conf /etc/sysctl.d/
-sysctl -p
+cp --verbose --force $WORK/limits-karaf.conf /etc/security/limits.d/
 
 echo "##################################################"
 echo "### disable installer dialogs"
