@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.2.0"
+	name="barchart-karaf-deployer-repository">
+
+	<feature name="barchart-karaf-deployer-repository" version="3.0.0-build002-SNAPSHOT"
+		description="barchart-karaf-deployer-repository" install="auto">
+
+		<details>barchart-karaf-deployer-repository</details>
+		
+		<bundle start-level="45">
+			mvn:com.barchart.karaf/barchart-karaf-deployer-features/3.0.0-build002-SNAPSHOT
+		</bundle>
+
+	</feature>
+	
+</features>
