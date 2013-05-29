@@ -1,0 +1,10 @@
+
+#
+# Keep project non-maven. 
+#
+!.project
+
+#
+# Kepp class path in the repo, used by launcher
+#
+!.classpath
