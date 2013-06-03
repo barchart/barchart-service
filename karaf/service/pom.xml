@@ -48,8 +48,15 @@
 
 		<!-- KARAF -->
 
-		<!-- Defines karaf distribution and plug-in version. -->
+		<!-- Defines karaf distribution and karaf plug-in version. -->
 		<karafVersion>3.0.0.RC1</karafVersion>
+		
+		<!-- Plug-in customization for alternative plug-in provider. -->
+		<karafPluginGroupId>org.apache.karaf.tooling</karafPluginGroupId>
+		<karafPluginArtifactId>karaf-maven-plugin</karafPluginArtifactId>
+		<karafPluginVersion>${karafVersion}</karafPluginVersion>
+		<karafPluginGoalDescriptor>features-generate-descriptor</karafPluginGoalDescriptor>
+		<karafPluginGoalInstallKars>install-kars</karafPluginGoalInstallKars>
 
 		<!-- Features to include in startup.properties. -->
 		<karafStartupFeature0 />
@@ -112,14 +119,6 @@
 			<scope>runtime</scope>
 		</dependency>
 
-		<!-- Plugin debug. -->
-		<!-- <dependency> -->
-		<!-- <groupId>org.apache.karaf.tooling</groupId> -->
-		<!-- <artifactId>karaf-maven-plugin</artifactId> -->
-		<!-- <version>3.0.0-build003-SNAPSHOT</version> -->
-		<!-- <scope>test</scope> -->
-		<!-- </dependency> -->
-
 	</dependencies>
 
 	<build>
@@ -128,10 +127,9 @@
 
 			<!-- Extract distribution archive and generate feature descriptor. -->
 			<plugin>
-				<groupId>org.apache.karaf.tooling</groupId>
-				<artifactId>karaf-maven-plugin</artifactId>
-				<version>${karafVersion}</version>
-				<!-- <version>3.0.0-build003-SNAPSHOT</version> -->
+				<groupId>${karafPluginGroupId}</groupId>
+				<artifactId>${karafPluginArtifactId}</artifactId>
+				<version>${karafPluginVersion}</version>
 				<executions>
 
 					<!-- Generate distribution archive. -->
@@ -139,7 +137,7 @@
 						<id>generate-distribution</id>
 						<phase>prepare-package</phase>
 						<goals>
-							<goal>install-kars</goal>
+							<goal>${karafPluginGoalInstallKars}</goal>
 						</goals>
 						<configuration>
 
@@ -193,7 +191,7 @@
 						<id>generate-descriptor</id>
 						<phase>prepare-package</phase>
 						<goals>
-							<goal>features-generate-descriptor</goal>
+							<goal>${karafPluginGoalDescriptor}</goal>
 						</goals>
 						<configuration>
 							<installMode>auto</installMode>
@@ -248,12 +246,12 @@
 								<!-- Do not run karaf plugin in eclipse. -->
 								<pluginExecution>
 									<pluginExecutionFilter>
-										<groupId>org.apache.karaf.tooling</groupId>
-										<artifactId>karaf-maven-plugin</artifactId>
+										<groupId>${karafPluginGroupId}</groupId>
+										<artifactId>${karafPluginArtifactId}</artifactId>
 										<versionRange>[0,)</versionRange>
 										<goals>
-											<goal>features-generate-descriptor</goal>
-											<goal>features-add-to-repository</goal>
+											<goal>${karafPluginGoalDescriptor}</goal>
+											<goal>${karafPluginGoalInstallKars}</goal>
 										</goals>
 									</pluginExecutionFilter>
 									<action>
