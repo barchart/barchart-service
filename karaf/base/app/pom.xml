@@ -106,7 +106,7 @@
 		<profile>
 			<id>copy-conf</id>
 			<properties>
-				<featureVersion>2.0.0</featureVersion>
+				<featureVersion>2.0.3</featureVersion>
 			</properties>
 			<build>
 				<plugins>
