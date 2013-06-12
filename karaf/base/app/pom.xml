@@ -130,7 +130,7 @@
 										<artifactItem>
 											<groupId>com.barchart.log</groupId>
 											<artifactId>barchart-log4j-aws-sns-pax-feature</artifactId>
-											<version>1.2.3</version>
+											<version>1.2.4</version>
 											<classifier>features</classifier>
 											<type>xml</type>
 										</artifactItem>
