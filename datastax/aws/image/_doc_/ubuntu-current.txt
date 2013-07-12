@@ -8,14 +8,14 @@
 
 http://cloud-images.ubuntu.com/releases/precise/release/
 
-use only "instance" store
+use only "ebs" root store
 
 Region 	arch 	root store 	ami 
-ap-northeast-1 	64-bit 	instance 	ami-7d1d977c 
-ap-southeast-1 	64-bit 	instance 	ami-b02f66e2 
-ap-southeast-2 	64-bit 	instance 	ami-934ddea9 
-eu-west-1 	64-bit 	instance 	ami-57b0a223 
-sa-east-1 	64-bit 	instance 	ami-027edb1f 
-us-east-1 	64-bit 	instance 	ami-d9d6a6b0 
-us-west-1 	64-bit 	instance 	ami-72072e37 
-us-west-2 	64-bit 	instance 	ami-5168f861 
+ap-northeast-1 	64-bit 	ebs 	ami-51129850 
+ap-southeast-1 	64-bit 	ebs 	ami-a02f66f2 
+ap-southeast-2 	64-bit 	ebs 	ami-974ddead 
+eu-west-1 	64-bit 	ebs 	ami-89b1a3fd 
+sa-east-1 	64-bit 	ebs 	ami-5c7edb41 
+us-east-1 	64-bit 	ebs 	ami-23d9a94a 
+us-west-1 	64-bit 	ebs 	ami-c4072e81 
+us-west-2 	64-bit 	ebs 	ami-fb68f8cb 

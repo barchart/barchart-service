@@ -36,7 +36,7 @@
 		<publishTarget>/tmp/publish_${projectTimeFile}</publishTarget>
 
 		<!-- Path to install script on remote. -->
-		<publishInstall>${publishTarget}/install.sh</publishInstall>
+		<publishInstall>${publishTarget}/install.py</publishInstall>
 
 		<!-- Location of logs on remote. -->
 		<retrieveSource>/var/${rootName}/log</retrieveSource>
@@ -254,13 +254,13 @@
 						<executions>
 
 							<!-- Create instance. -->
-							<execution>
-								<id>stack-create</id>
-								<phase>package</phase>
-								<goals>
-									<goal>cloud-formation-create</goal>
-								</goals>
-							</execution>
+							<!-- <execution> -->
+							<!-- <id>stack-create</id> -->
+							<!-- <phase>package</phase> -->
+							<!-- <goals> -->
+							<!-- <goal>cloud-formation-create</goal> -->
+							<!-- </goals> -->
+							<!-- </execution> -->
 
 							<!-- Copy install script. -->
 							<execution>
@@ -287,7 +287,7 @@
 									<goal>secure-shell-execute</goal>
 								</goals>
 								<configuration>
-									<sshCommand>sudo bash ${publishInstall}</sshCommand>
+									<sshCommand>sudo python ${publishInstall}</sshCommand>
 									<sshStatusSuccess>
 										<status>0</status>
 									</sshStatusSuccess>
@@ -312,22 +312,22 @@
 							<!-- </execution> -->
 
 							<!-- Create image form instance. -->
-							<execution>
-								<id>image-create</id>
-								<phase>package</phase>
-								<goals>
-									<goal>elastic-compute-image-create</goal>
-								</goals>
-							</execution>
+							<!-- <execution> -->
+							<!-- <id>image-create</id> -->
+							<!-- <phase>package</phase> -->
+							<!-- <goals> -->
+							<!-- <goal>elastic-compute-image-create</goal> -->
+							<!-- </goals> -->
+							<!-- </execution> -->
 
 							<!-- Remove instance. -->
-							<execution>
-								<id>stack-delete</id>
-								<phase>package</phase>
-								<goals>
-									<goal>cloud-formation-delete</goal>
-								</goals>
-							</execution>
+							<!-- <execution> -->
+							<!-- <id>stack-delete</id> -->
+							<!-- <phase>package</phase> -->
+							<!-- <goals> -->
+							<!-- <goal>cloud-formation-delete</goal> -->
+							<!-- </goals> -->
+							<!-- </execution> -->
 
 						</executions>
 
