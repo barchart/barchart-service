@@ -1,0 +1,111 @@
+{
+	
+    "AWSTemplateFormatVersion": "2010-09-09",
+    
+    "Description": "datastax image builder / ${project.artifactId}",
+    
+    "Parameters": {
+
+        "ParamKeyName" : {
+            "Type" : "String",
+            "Default" : "barchart-karaf",
+            "Description" : "Name of an existing EC2 KeyPair to enable SSH access to the instances"
+        },
+        
+        "ParamInstanceType" : { 
+            "Type" : "String", 
+            "Default" : "m1.medium",
+            "Description" : "EC2 cpu/memory instance size selector"
+        },
+        
+        "ParamZoneName": {
+            "Type": "String",
+            "Default" : "aws.barchart.com.",
+            "Description": "Route 53 zone name which will contain the instance"
+        },
+        
+        "ParamHostName": {
+            "Type": "String",
+            "Default" : "datastax-image.aws.barchart.com.",
+            "Description": "Route 53 host name which will be assigned to the instance"
+        }
+        
+    },
+    
+    "Mappings": {
+    	
+        "RegionImageMap": {
+            "ap-northeast-1": { "AMI": "ami-7d1d977c" },
+            "ap-southeast-1": { "AMI": "ami-b02f66e2" },
+            "ap-southeast-2": { "AMI": "ami-934ddea9" },
+            "eu-west-1":      { "AMI": "ami-57b0a223" },
+            "sa-east-1":      { "AMI": "ami-027edb1f" },
+            "us-east-1":      { "AMI": "ami-d9d6a6b0" },
+            "us-west-1":      { "AMI": "ami-72072e37" },
+            "us-west-2":      { "AMI": "ami-5168f861" }
+        }
+    
+    },
+    
+    "Resources": {
+    	
+        "DataStaxInstance": {
+            "Type": "AWS::EC2::Instance",
+            "Properties": {
+                "KeyName": { "Ref": "ParamKeyName" },
+                "InstanceType": { "Ref": "ParamInstanceType" },
+                "ImageId": { "Fn::FindInMap": [ "RegionImageMap", { "Ref": "AWS::Region" }, "AMI" ] }
+            }
+        },
+        
+        "DataStaxDNS": {
+            "Type": "AWS::Route53::RecordSet",
+            "Properties": {
+                "Name": { "Ref": "ParamHostName" },
+                "HostedZoneName": { "Ref": "ParamZoneName" },
+                "Comment": "CNAME for karaf-image",
+                "Type": "CNAME",
+                "TTL": "60",
+                "ResourceRecords": [
+                    { "Fn::GetAtt": [ "DataStaxInstance", "PublicDnsName" ] }
+                ]
+            }
+        }
+        
+    },
+    
+    "Outputs": {
+    	
+        "OutputInstanceId": {
+            "Description": "EC2 InstanceId",
+            "Value": { "Ref": "DataStaxInstance" }
+        },
+        
+        "OutputAvailabilityZone": {
+            "Description": "Availability Zone",
+            "Value": { "Fn::GetAtt": [ "DataStaxInstance", "AvailabilityZone" ] } 
+        },
+        
+        "OutputPublicIp": {
+            "Description": "Public IP address",
+            "Value": { "Fn::GetAtt": [ "DataStaxInstance", "PublicIp" ] }
+        },
+        
+        "OutputPrivateIp": {
+            "Description": "Private IP address",
+            "Value": { "Fn::GetAtt": [ "DataStaxInstance", "PrivateIp" ] } 
+        },
+        
+        "OutputPublicDnsName": {
+            "Description": "Public Dns Name",
+            "Value": { "Fn::GetAtt": [ "DataStaxInstance", "PublicDnsName" ] }
+        },
+        
+        "OutputPrivateDnsName": {
+            "Description": "Private Dns Name",
+            "Value": { "Fn::GetAtt": [ "DataStaxInstance", "PrivateDnsName" ] }
+        }
+        
+    }
+    
+}

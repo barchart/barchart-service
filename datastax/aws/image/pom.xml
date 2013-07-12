@@ -1,0 +1,344 @@
+<!-- Copyright (C) 2011-2013 Barchart, Inc. <http://www.barchart.com/> All 
+	rights reserved. Licensed under the OSI BSD License. http://www.opensource.org/licenses/bsd-license.php -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.barchart.base</groupId>
+		<artifactId>barchart-archon</artifactId>
+		<version>2.5.12</version>
+		<relativePath />
+	</parent>
+
+	<groupId>com.barchart.datastax</groupId>
+	<artifactId>barchart-datastax-aws-image</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<description>amazon image builder for datastax/cassandra</description>
+
+	<properties>
+
+		<rootName>datastax</rootName>
+
+		<!-- Amazon region-dependent parameters. -->
+		<stackName>${rootName}-image-${amazonRegion}-barchart-com</stackName>
+		<ParamHostName>${rootName}-image.${amazonRegion}.aws.barchart.com.</ParamHostName>
+
+		<!-- DataStax user config template on local. -->
+		<datastaxTemplate>${user.home}/.${rootName}/barchart-${rootName}</datastaxTemplate>
+
+		<!-- Location of build resources on local. -->
+		<publishSource>${basedir}/target/publish</publishSource>
+		<!-- Location of build resources on remote. -->
+		<publishTarget>/tmp/publish_${projectTimeFile}</publishTarget>
+
+		<!-- Path to install script on remote. -->
+		<publishInstall>${publishTarget}/install.sh</publishInstall>
+
+		<!-- Location of logs on remote. -->
+		<retrieveSource>/var/${rootName}/log</retrieveSource>
+		<!-- Location of logs on local. -->
+		<retrieveTarget>./target/retrieve/log</retrieveTarget>
+
+	</properties>
+
+	<profiles>
+
+		<profile>
+
+			<!-- List AMI id from all AWS regions. -->
+			<id>image-list</id>
+
+			<build>
+
+				<plugins>
+
+					<plugin>
+
+						<groupId>com.carrotgarden.maven</groupId>
+						<artifactId>carrot-maven-aws-plugin</artifactId>
+						<version>1.2.6</version>
+
+						<configuration>
+
+							<!-- See settings.xml -->
+							<computeServerId>barchart-karaf-compute</computeServerId>
+
+							<!-- First, apply filter http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeImages.html -->
+							<imageFilter>is-public=false</imageFilter>
+
+							<!-- Second, apply regex -->
+							<imageRegex>.*${rootName}.*</imageRegex>
+
+						</configuration>
+
+						<executions>
+
+							<!-- Collect all regions. -->
+							<execution>
+								<id>image-list-ap-northeast-1</id>
+								<phase>package</phase>
+								<goals>
+									<goal>elastic-compute-image-list</goal>
+								</goals>
+								<configuration>
+									<amazonRegion>ap-northeast-1</amazonRegion>
+								</configuration>
+							</execution>
+							<execution>
+								<id>image-list-ap-southeast-1</id>
+								<phase>package</phase>
+								<goals>
+									<goal>elastic-compute-image-list</goal>
+								</goals>
+								<configuration>
+									<amazonRegion>ap-southeast-1</amazonRegion>
+								</configuration>
+							</execution>
+							<execution>
+								<id>image-list-ap-southeast-2</id>
+								<phase>package</phase>
+								<goals>
+									<goal>elastic-compute-image-list</goal>
+								</goals>
+								<configuration>
+									<amazonRegion>ap-southeast-2</amazonRegion>
+								</configuration>
+							</execution>
+							<execution>
+								<id>image-list-eu-west-1</id>
+								<phase>package</phase>
+								<goals>
+									<goal>elastic-compute-image-list</goal>
+								</goals>
+								<configuration>
+									<amazonRegion>eu-west-1</amazonRegion>
+								</configuration>
+							</execution>
+							<execution>
+								<id>image-list-sa-east-1</id>
+								<phase>package</phase>
+								<goals>
+									<goal>elastic-compute-image-list</goal>
+								</goals>
+								<configuration>
+									<amazonRegion>sa-east-1</amazonRegion>
+								</configuration>
+							</execution>
+							<execution>
+								<id>image-list-us-east-1</id>
+								<phase>package</phase>
+								<goals>
+									<goal>elastic-compute-image-list</goal>
+								</goals>
+								<configuration>
+									<amazonRegion>us-east-1</amazonRegion>
+								</configuration>
+							</execution>
+							<execution>
+								<id>image-list-us-west-1</id>
+								<phase>package</phase>
+								<goals>
+									<goal>elastic-compute-image-list</goal>
+								</goals>
+								<configuration>
+									<amazonRegion>us-west-1</amazonRegion>
+								</configuration>
+							</execution>
+							<execution>
+								<id>image-list-us-west-2</id>
+								<phase>package</phase>
+								<goals>
+									<goal>elastic-compute-image-list</goal>
+								</goals>
+								<configuration>
+									<amazonRegion>us-west-2</amazonRegion>
+								</configuration>
+							</execution>
+
+							<!-- Report the result. -->
+							<execution>
+								<id>image-list-result</id>
+								<phase>package</phase>
+								<goals>
+									<goal>groovy-execute-script</goal>
+								</goals>
+								<configuration>
+									<groovyFile>${basedir}/src/main/groovy/RegionImageMap.groovy</groovyFile>
+								</configuration>
+							</execution>
+
+						</executions>
+
+					</plugin>
+
+				</plugins>
+
+			</build>
+
+		</profile>
+
+		<profile>
+
+			<id>image-build</id>
+
+			<build>
+
+				<plugins>
+
+					<!-- Copy config templates. -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-resources-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>publish-prepare</id>
+								<goals>
+									<goal>copy-resources</goal>
+								</goals>
+								<phase>package</phase>
+								<configuration>
+									<resources>
+										<resource>
+											<directory>${basedir}/src/main/script</directory>
+											<filtering>true</filtering>
+										</resource>
+										<resource>
+											<directory>${basedir}/src/main/template</directory>
+											<filtering>true</filtering>
+										</resource>
+										<!-- <resource> -->
+										<!-- <directory>${datastaxTemplate}</directory> -->
+										<!-- <filtering>false</filtering> -->
+										<!-- </resource> -->
+									</resources>
+									<outputDirectory>${publishSource}</outputDirectory>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+
+					<!-- Build the image. -->
+					<plugin>
+
+						<groupId>com.carrotgarden.maven</groupId>
+						<artifactId>carrot-maven-aws-plugin</artifactId>
+						<version>1.2.6</version>
+
+						<configuration>
+
+							<!-- Used by all goals. -->
+							<amazonRegion>${amazonRegion}</amazonRegion>
+
+							<!-- Used by cloud-formation goals. -->
+							<stackName>${stackName}</stackName>
+							<stackServerId>barchart-karaf-stack</stackServerId>
+							<stackTemplateFile>${publishSource}/${rootName}-image.template</stackTemplateFile>
+
+							<!-- Used by ssh goals. -->
+							<sshUser>ubuntu</sshUser>
+							<sshHost>${ParamHostName}</sshHost>
+							<sshKeyFile>${user.home}/.ssh/barchart-karaf/barchart-karaf.pem</sshKeyFile>
+
+							<!-- Used by elastic-compute goals. -->
+							<computeServerId>barchart-karaf-compute</computeServerId>
+							<imageName>${rootName}_${projectTimeFile}</imageName>
+							<imageDescription>base image of java with ${rootName}</imageDescription>
+							<imageInstanceIdProperty>OutputInstanceId</imageInstanceIdProperty>
+
+						</configuration>
+
+						<executions>
+
+							<!-- Create instance. -->
+							<execution>
+								<id>stack-create</id>
+								<phase>package</phase>
+								<goals>
+									<goal>cloud-formation-create</goal>
+								</goals>
+							</execution>
+
+							<!-- Copy install script. -->
+							<execution>
+								<id>ssh-publish</id>
+								<phase>package</phase>
+								<goals>
+									<goal>secure-shell-publish</goal>
+								</goals>
+								<configuration>
+									<sshSource>${publishSource}</sshSource>
+									<sshTarget>${publishTarget}</sshTarget>
+									<sshStatusSuccess>
+										<status>0</status>
+										<status>-1</status>
+									</sshStatusSuccess>
+								</configuration>
+							</execution>
+
+							<!-- Execute install script in the instance. -->
+							<execution>
+								<id>ssh-execute</id>
+								<phase>package</phase>
+								<goals>
+									<goal>secure-shell-execute</goal>
+								</goals>
+								<configuration>
+									<sshCommand>sudo bash ${publishInstall}</sshCommand>
+									<sshStatusSuccess>
+										<status>0</status>
+									</sshStatusSuccess>
+								</configuration>
+							</execution>
+
+							<!-- Retrieve startup logs. -->
+							<!-- <execution> -->
+							<!-- <id>ssh-retrieve</id> -->
+							<!-- <phase>package</phase> -->
+							<!-- <goals> -->
+							<!-- <goal>secure-shell-retrieve</goal> -->
+							<!-- </goals> -->
+							<!-- <configuration> -->
+							<!-- <sshSource>${retrieveSource}</sshSource> -->
+							<!-- <sshTarget>${retrieveTarget}</sshTarget> -->
+							<!-- <sshStatusSuccess> -->
+							<!-- <status>0</status> -->
+							<!-- <status>-1</status> -->
+							<!-- </sshStatusSuccess> -->
+							<!-- </configuration> -->
+							<!-- </execution> -->
+
+							<!-- Create image form instance. -->
+							<execution>
+								<id>image-create</id>
+								<phase>package</phase>
+								<goals>
+									<goal>elastic-compute-image-create</goal>
+								</goals>
+							</execution>
+
+							<!-- Remove instance. -->
+							<execution>
+								<id>stack-delete</id>
+								<phase>package</phase>
+								<goals>
+									<goal>cloud-formation-delete</goal>
+								</goals>
+							</execution>
+
+						</executions>
+
+					</plugin>
+
+				</plugins>
+
+			</build>
+
+		</profile>
+
+	</profiles>
+
+</project>

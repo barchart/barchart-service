@@ -1,0 +1,28 @@
+{
+    "RegionImageMap": {
+        "ap-northeast-1": {
+            "AMI": "TODO"
+        },
+        "ap-southeast-1": {
+            "AMI": "TODO"
+        },
+        "ap-southeast-2": {
+            "AMI": "TODO"
+        },
+        "eu-west-1": {
+            "AMI": "ami-a2fbf2d6"
+        },
+        "sa-east-1": {
+            "AMI": "ami-d3a57ece"
+        },
+        "us-east-1": {
+            "AMI": "ami-e601908f"
+        },
+        "us-west-1": {
+            "AMI": "ami-227e5c67"
+        },
+        "us-west-2": {
+            "AMI": "ami-ba7df78a"
+        }
+    }
+}
