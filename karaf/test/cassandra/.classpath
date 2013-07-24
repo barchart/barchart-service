@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="lib" path="target/@lib/karaf-jaas-boot.jar"/>
+	<classpathentry kind="lib" path="target/@lib/karaf-org.osgi.core.jar"/>
+	<classpathentry kind="lib" path="target/@lib/karaf.jar"/>
+	<classpathentry kind="lib" path="target/@lib/org.apache.servicemix.specs.activator-2.2.0.jar"/>
+	<classpathentry kind="lib" path="target/@lib/org.apache.servicemix.specs.locator-2.2.0.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

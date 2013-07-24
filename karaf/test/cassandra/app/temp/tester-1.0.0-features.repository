@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.2.0" name="tester">
+
+    <feature name="barchart-tester" version="1.0.0" description="barchart-tester" install="auto">
+        <details>barchart-tester</details>
+        <bundle>mvn:com.barchart.util/barchart-util-anno/2.0.32</bundle>
+    </feature>
+    
+</features>

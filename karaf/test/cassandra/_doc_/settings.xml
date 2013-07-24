@@ -1,0 +1,52 @@
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                      http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+	<servers>
+
+		<server>
+			<id>barchart-nexus-archon</id>
+			<username>XXX</username>
+			<password>XXX</password>
+		</server>
+
+	</servers>
+
+	<profiles>
+
+		<profile>
+			<id>barchart-archon-profile</id>
+			<repositories>
+				<repository>
+					<id>barchart-nexus-archon</id>
+					<url>https://nexus.barchart.com/content/groups/archon/</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
+				</repository>
+			</repositories>
+		</profile>
+
+	</profiles>
+
+	<mirrors>
+
+		<mirror>
+			<id>barchart-nexus-archon</id>
+			<mirrorOf>central,barchart-nexus-archon,sonatype-nexus-archon</mirrorOf>
+			<url>https://nexus.barchart.com/content/groups/archon</url>
+		</mirror>
+
+	</mirrors>
+
+	<activeProfiles>
+
+		<activeProfile>barchart-archon-profile</activeProfile>
+
+	</activeProfiles>
+
+</settings>

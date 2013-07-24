@@ -1,0 +1,12 @@
+#
+# must override in per-project ./conf
+#
+
+#
+# provides users ssh public keys for sshd karaf service
+#
+#
+# file format:
+#
+# ssh-rsa userPublicKey userName@userDomain
+#
