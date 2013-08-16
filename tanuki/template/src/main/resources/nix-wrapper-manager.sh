@@ -808,8 +808,9 @@ do_install(){
         log "error: failed to add: $WRAPPER_SVC"
         exit 1
     fi
-    chmod 775 "$WRAPPER_SVC"
-    chown --silent --recursive "$RUN_AS_USER":root "$REAL_PATH"
+    # DISABLE
+    #chmod 775 "$WRAPPER_SVC"
+    #chown --silent --recursive "$RUN_AS_USER":root "$REAL_PATH"
 }
 
 do_uninstall(){
