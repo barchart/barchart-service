@@ -57,15 +57,8 @@
 JAVA_CMD="${javaCommand}"
 
 # Application naming convention
-if [ "X$SERVICE_NAME" != "X" ] ; then
-	# use service name override 
-	APP_NAME="$SERVICE_NAME"
-	APP_LONG_NAME="$SERVICE_NAME"
-else
-	# use default service name
-	APP_NAME="${serviceName}"
-	APP_LONG_NAME="${description} [${serviceName}]"
-fi
+APP_NAME="${serviceName}"
+APP_LONG_NAME="${description} [${serviceName}]"
 
 #
 # Wrapper configuration file location
