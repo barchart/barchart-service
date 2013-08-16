@@ -491,8 +491,8 @@ checkUser() {
     # Still want to change users, recurse.
     if [ "X$RUN_AS_USER" != "X" ] ; then
 
-	log "currently script is running as user: `$CMD_ID`"
-	log "switching to run as configured user: $RUN_AS_USER"
+		log "currently script is running as user: `$CMD_ID`"
+		log "switching to run as configured user: $RUN_AS_USER"
 
         # If LOCK_PROP and $RUN_AS_USER are defined then the new user will most likely not be
         # able to create the lock file.  The Wrapper will be able to update this file once it
@@ -510,9 +510,9 @@ checkUser() {
             fi
         fi
 
-        # user will only be prompted for a password once.
-        # variables shifted by 1.
+		# invoke recursive call
         $CMD_SU - $RUN_AS_USER --command "\"$SCRIPT\" $2"
+        CMD_SU_RV="$?"
 
         # Now that we are the original user again, we may need to clean up the lock file.
         if [ "X$LOCK_PROP" != "X" ] ; then
@@ -526,7 +526,8 @@ checkUser() {
         fi
 
 		# terminate, since job was done in the recursive call
-        exit 0
+		# preserve command exit code
+        exit $CMD_SU_RV
 
     fi
 }
