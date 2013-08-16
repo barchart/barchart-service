@@ -26,7 +26,7 @@
 	<properties>
 
 		<!-- you SHOULD override template version in your project -->
-		<templateVersion>3.5.20-build000</templateVersion>
+		<templateVersion>3.5.20-build001</templateVersion>
 
 		<!-- you CAN override this path in order to use non-default java executable, 
 			such as: java32, java64, java7x32, java7x64; -->
