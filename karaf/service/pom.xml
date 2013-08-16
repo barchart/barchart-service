@@ -7,13 +7,13 @@
 	<parent>
 		<groupId>com.barchart.tanuki</groupId>
 		<artifactId>barchart-tanuki-service</artifactId>
-		<version>2.0.14</version>
+		<version>2.1.1</version>
 		<relativePath>../barchart-tanuki-service</relativePath>
 	</parent>
 
 	<groupId>com.barchart.karaf</groupId>
 	<artifactId>barchart-karaf-service</artifactId>
-	<version>1.0.7-SNAPSHOT</version>
+	<version>1.1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<description>parent for karaf based apps</description>
