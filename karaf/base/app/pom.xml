@@ -37,12 +37,11 @@
 		<karafBootupFeature2>eventadmin</karafBootupFeature2>
 		<karafBootupFeature3>scr</karafBootupFeature3>
 		<karafBootupFeature4>ssh</karafBootupFeature4>
-		<!-- <karafBootupFeature5>management</karafBootupFeature5> -->
-		<!-- <karafBootupFeature6>obr</karafBootupFeature6> -->
+		<karafBootupFeature5>kar</karafBootupFeature5>
 		<karafBootupFeature9>barchart-conf-feature</karafBootupFeature9>
 
 		<!-- Custom barchart plug-in. -->
-		<karafPluginVersion>3.0.0-build005</karafPluginVersion>
+		<karafPluginVersion>3.0.0-build006</karafPluginVersion>
 		<karafPluginGoalDescriptor>features-generate-semantic</karafPluginGoalDescriptor>
 
 		<!-- Integration tests for base app. -->
