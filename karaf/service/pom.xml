@@ -49,7 +49,7 @@
 		<!-- KARAF -->
 
 		<!-- Defines karaf distribution and karaf plug-in version. -->
-		<karafVersion>3.0.0.RC1</karafVersion>
+		<karafVersion>3.0.0</karafVersion>
 		
 		<!-- Plug-in customization for alternative plug-in provider. -->
 		<karafPluginGroupId>org.apache.karaf.tooling</karafPluginGroupId>
