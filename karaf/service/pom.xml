@@ -39,6 +39,7 @@
 		<javaParameter1>-Dkaraf.startRemoteShell=true</javaParameter1>
 		<javaParameter2>-Dkaraf.home=.</javaParameter2>
 		<javaParameter3>-Dkaraf.base=.</javaParameter3>
+		<javaParameter3>-Dkaraf.etc=./etc</javaParameter3>
 		<javaParameter4>-Dkaraf.data=./data</javaParameter4>
 		<javaParameter5>-Dkaraf.instances=./instances</javaParameter5>
 		<javaParameter6>-Djava.io.tmpdir=./data/tmp</javaParameter6>
