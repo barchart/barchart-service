@@ -24,15 +24,15 @@
 
 		<!-- should be set by developer during interactive work to reflect current 
 			barchart-karaf-base-app -->
-		<integrationVersion>1.2.6-SNAPSHOT</integrationVersion>
+		<integrationVersion>1.5.1-SNAPSHOT</integrationVersion>
 
 		<projectJavaVersion>1.7</projectJavaVersion>
 
 		<!-- <projectKarafVersion>2.3.1</projectKarafVersion> -->
-		<projectKarafVersion>3.0.0.RC1</projectKarafVersion>
+		<projectKarafVersion>3.0.0</projectKarafVersion>
 
 		<projectGogoVersion>0.10.0</projectGogoVersion>
-		<projectExamVersion>2.6.0</projectExamVersion>
+		<projectExamVersion>3.4.0</projectExamVersion>
 
 	</properties>
 
@@ -50,9 +50,9 @@
 
 		<!-- karaf pax exam runner -->
 		<dependency>
-			<groupId>org.apache.karaf.tooling.exam</groupId>
-			<artifactId>org.apache.karaf.tooling.exam.container</artifactId>
-			<version>${projectKarafVersion}</version>
+			<groupId>org.ops4j.pax.exam</groupId>
+			<artifactId>pax-exam-container-karaf</artifactId>
+			<version>${projectExamVersion}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>

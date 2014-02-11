@@ -1,8 +1,14 @@
 package com.barchart.karaf.test;
 
-import static org.apache.karaf.tooling.exam.options.KarafDistributionOption.*;
-import static org.junit.Assert.*;
-import static org.ops4j.pax.exam.CoreOptions.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+import static org.ops4j.pax.exam.CoreOptions.maven;
+import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.editConfigurationFilePut;
+import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.karafDistributionConfiguration;
+import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.keepRuntimeFolder;
+import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.logLevel;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -33,11 +39,11 @@ import org.apache.felix.service.command.CommandSession;
 import org.apache.karaf.features.BootFinished;
 import org.apache.karaf.features.Feature;
 import org.apache.karaf.features.FeaturesService;
-import org.apache.karaf.tooling.exam.options.LogLevelOption;
 import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.TestProbeBuilder;
 import org.ops4j.pax.exam.junit.Configuration;
 import org.ops4j.pax.exam.junit.ProbeBuilder;
+import org.ops4j.pax.exam.karaf.options.LogLevelOption;
 import org.ops4j.pax.exam.options.MavenUrlReference;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
@@ -257,7 +263,7 @@ public class TestAny {
 	/**
 	 * Executes a shell command and returns output as a String. Commands have a
 	 * default timeout of 10 seconds.
-	 * 
+	 *
 	 * @param command
 	 * @return
 	 */
@@ -268,7 +274,7 @@ public class TestAny {
 	/**
 	 * Executes a shell command and returns output as a String. Commands have a
 	 * default timeout of 10 seconds.
-	 * 
+	 *
 	 * @param command
 	 *            The command to execute.
 	 * @param timeout
