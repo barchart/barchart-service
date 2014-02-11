@@ -52,13 +52,6 @@
 		<!-- Defines karaf distribution and karaf plug-in version. -->
 		<karafVersion>3.0.0</karafVersion>
 		
-		<!-- Plug-in customization for alternative plug-in provider. -->
-		<karafPluginGroupId>org.apache.karaf.tooling</karafPluginGroupId>
-		<karafPluginArtifactId>karaf-maven-plugin</karafPluginArtifactId>
-		<karafPluginVersion>${karafVersion}</karafPluginVersion>
-		<karafPluginGoalDescriptor>features-generate-descriptor</karafPluginGoalDescriptor>
-		<karafPluginGoalInstallKars>install-kars</karafPluginGoalInstallKars>
-
 		<!-- Features to include in startup.properties. -->
 		<karafStartupFeature0 />
 		<karafStartupFeature1 />
@@ -128,9 +121,8 @@
 
 			<!-- Extract distribution archive and generate feature descriptor. -->
 			<plugin>
-				<groupId>${karafPluginGroupId}</groupId>
-				<artifactId>${karafPluginArtifactId}</artifactId>
-				<version>${karafPluginVersion}</version>
+				<groupId>org.apache.karaf.tooling</groupId>
+				<artifactId>karaf-maven-plugin</artifactId>
 				<executions>
 
 					<!-- Generate distribution archive. -->
@@ -138,7 +130,7 @@
 						<id>generate-distribution</id>
 						<phase>prepare-package</phase>
 						<goals>
-							<goal>${karafPluginGoalInstallKars}</goal>
+							<goal>install-kars</goal>
 						</goals>
 						<configuration>
 
@@ -192,7 +184,7 @@
 						<id>generate-descriptor</id>
 						<phase>prepare-package</phase>
 						<goals>
-							<goal>${karafPluginGoalDescriptor}</goal>
+							<goal>features-generate-semantic</goal>
 						</goals>
 						<configuration>
 							<installMode>auto</installMode>
@@ -247,12 +239,12 @@
 								<!-- Do not run karaf plugin in eclipse. -->
 								<pluginExecution>
 									<pluginExecutionFilter>
-										<groupId>${karafPluginGroupId}</groupId>
-										<artifactId>${karafPluginArtifactId}</artifactId>
+										<groupId>org.apache.karaf.tooling</groupId>
+										<artifactId>karaf-maven-plugin</artifactId>
 										<versionRange>[0,)</versionRange>
 										<goals>
-											<goal>${karafPluginGoalDescriptor}</goal>
-											<goal>${karafPluginGoalInstallKars}</goal>
+											<goal>features-generate-semantic</goal>
+											<goal>install-kars</goal>
 										</goals>
 									</pluginExecutionFilter>
 									<action>
