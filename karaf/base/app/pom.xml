@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>com.barchart.karaf</groupId>
 		<artifactId>barchart-karaf-service</artifactId>
-		<version>1.1.0</version>
+		<version>1.1.1</version>
 		<relativePath>../../service</relativePath>
 	</parent>
 
@@ -40,10 +40,6 @@
 		<karafBootupFeature5>kar</karafBootupFeature5>
 		<karafBootupFeature9>barchart-conf-feature</karafBootupFeature9>
 
-		<!-- Custom barchart plug-in. -->
-		<karafPluginVersion>3.0.0-build006</karafPluginVersion>
-		<karafPluginGoalDescriptor>features-generate-semantic</karafPluginGoalDescriptor>
-
 		<!-- Integration tests for base app. -->
 		<integrationFolder>${basedir}/verify</integrationFolder>
 		<integrationProject>verify</integrationProject>
@@ -72,32 +68,6 @@
 			<scope>runtime</scope>
 		</dependency>
 
-		<!-- Karaf startup features - add to startup.properties -->
-
-		<!-- Amazon SNS logger. Not part of karaf/system. -->
-		<!-- <dependency> -->
-		<!-- <groupId>com.barchart.log</groupId> -->
-		<!-- <artifactId>barchart-log4j-aws-sns-pax-feature</artifactId> -->
-		<!-- <version>1.1.5</version> -->
-		<!-- <classifier>features</classifier> -->
-		<!-- <type>xml</type> -->
-		<!-- <scope>compile</scope> -->
-		<!-- </dependency> -->
-
-		<!-- Features service boot features - add to org.apache.karaf.features.cfg -->
-
-		<!-- Configuration repository functions. -->
-		<!-- 1) provide the default in the image /conf folder. -->
-		<!-- 2) instance must provide custom feature in the /instance folder. -->
-		<!-- <dependency> -->
-		<!-- <groupId>com.barchart.conf</groupId> -->
-		<!-- <artifactId>barchart-conf-feature</artifactId> -->
-		<!-- <version>1.2.1</version> -->
-		<!-- <classifier>features</classifier> -->
-		<!-- <type>xml</type> -->
-		<!-- <scope>runtime</scope> -->
-		<!-- </dependency> -->
-
 	</dependencies>
 
 	<profiles>
@@ -121,7 +91,7 @@
 										<artifactItem>
 											<groupId>com.barchart.conf</groupId>
 											<artifactId>barchart-conf-feature-remote</artifactId>
-											<version>2.0.4</version>
+											<version>2.0.9</version>
 											<classifier>features</classifier>
 											<type>xml</type>
 										</artifactItem>

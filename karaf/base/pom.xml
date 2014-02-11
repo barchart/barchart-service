@@ -18,12 +18,9 @@
 	<packaging>pom</packaging>
 
 	<modules>
-
-		<module>../barchart-karaf-base-app</module>
-
-		<module>../barchart-karaf-base-app/verify/test01</module>
-		<module>../barchart-karaf-base-app/verify/test01-feature</module>
-		
+		<module>app</module>
+		<module>brand</module>
+		<module>health-report</module>
 	</modules>
 
 </project>
