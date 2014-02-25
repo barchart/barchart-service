@@ -98,21 +98,18 @@
 		<serviceUsername>${user.name}</serviceUsername>
 		<servicePassword />
 
-		<!-- you CAN change your app folder layout only if you know how it correlates 
-			to the service template folder layout -->
+		<!-- Determines the boot service name and root directory name for distro packaging -->
+		<serviceName>${project.name}</serviceName>
+
+		<!-- Custom files to include in the distribution package -->
 		<appFolderName>app</appFolderName>
 		<libFolderName>lib</libFolderName>
 
 		<!-- do NOT change -->
-		<serviceName>${project.name}_${project.version}_${timestamp}</serviceName>
-
-		<!-- do NOT change -->
 		<targdir>${project.build.directory}</targdir>
-		<appFolderNameTemplate>${appFolderName}_template</appFolderNameTemplate>
-		<appFolderNameTimestamp>${appFolderName}_${timestamp}</appFolderNameTimestamp>
 		<appFolderSource>${basedir}/${appFolderName}</appFolderSource>
-		<appFolderTemplate>${targdir}/${appFolderNameTemplate}</appFolderTemplate>
-		<appFolderTarget>${targdir}/${appFolderNameTimestamp}</appFolderTarget>
+		<appFolderTemplate>${targdir}/${appFolderName}_template</appFolderTemplate>
+		<appFolderTarget>${targdir}/${serviceName}</appFolderTarget>
 		<libFolderTarget>${appFolderTarget}/${libFolderName}</libFolderTarget>
 
 		<mavenStamp>ARTIFACT=${project.artifactId}.VERSION=${project.version}.TIMESTAMP=${timestamp}</mavenStamp>
@@ -126,7 +123,7 @@
 		<assembly-name>tanuki-distro</assembly-name>
 
 		<!-- debian / redhat package install folder -->
-		<serviceInstallFolder>/var/service/${appFolderNameTimestamp}</serviceInstallFolder>
+		<serviceInstallFolder>/var/service/${appFolderName}</serviceInstallFolder>
 
 	</properties>
 
