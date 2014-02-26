@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>com.barchart.karaf</groupId>
 		<artifactId>barchart-karaf-service</artifactId>
-		<version>1.1.1</version>
+		<version>1.1.2</version>
 		<relativePath>../../service</relativePath>
 	</parent>
 
@@ -28,7 +28,8 @@
 
 		<projectJavaVersion>1.7</projectJavaVersion>
 
-		<!-- Note: must setup 'karaf' user on target server. -->
+		<!-- Default service configuration -->
+		<serviceName>barchart-karaf</serviceName>
 		<serviceUsername>karaf</serviceUsername>
 
 		<!-- Install during karaf feature service boot. -->
