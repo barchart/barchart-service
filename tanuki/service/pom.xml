@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>com.barchart.base</groupId>
 		<artifactId>barchart-archon</artifactId>
-		<version>2.6.7</version>
+		<version>2.6.8</version>
 		<relativePath />
 	</parent>
 
@@ -26,7 +26,7 @@
 	<properties>
 
 		<!-- you SHOULD override template version in your project -->
-		<templateVersion>3.5.20-build001</templateVersion>
+		<templateVersion>3.5.20-build002</templateVersion>
 
 		<!-- you CAN override this path in order to use non-default java executable, 
 			such as: java32, java64, java7x32, java7x64; -->
@@ -102,12 +102,11 @@
 		<serviceName>${project.name}</serviceName>
 
 		<!-- Custom files to include in the distribution package -->
-		<appFolderName>app</appFolderName>
+		<appFolderName>${serviceName}</appFolderName>
 		<libFolderName>lib</libFolderName>
 
-		<!-- do NOT change -->
 		<targdir>${project.build.directory}</targdir>
-		<appFolderSource>${basedir}/${appFolderName}</appFolderSource>
+		<appFolderSource>${basedir}/app</appFolderSource>
 		<appFolderTemplate>${targdir}/${appFolderName}_template</appFolderTemplate>
 		<appFolderTarget>${targdir}/${serviceName}</appFolderTarget>
 		<libFolderTarget>${appFolderTarget}/${libFolderName}</libFolderTarget>
@@ -123,7 +122,7 @@
 		<assembly-name>tanuki-distro</assembly-name>
 
 		<!-- debian / redhat package install folder -->
-		<serviceInstallFolder>/var/service/${appFolderName}</serviceInstallFolder>
+		<serviceInstallFolder>/var/service/${serviceName}</serviceInstallFolder>
 
 	</properties>
 
@@ -298,69 +297,6 @@
 									</descriptorRefs>
 									<outputDirectory>target</outputDirectory>
 								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-
-					<!-- make links to ease testing -->
-					<plugin>
-						<groupId>com.pyx4j</groupId>
-						<artifactId>maven-junction-plugin</artifactId>
-						<version>1.0.3</version>
-						<configuration>
-							<links>
-								<link>
-									<src>${appFolderTarget}/nix-restart.sh</src>
-									<dst>${basedir}/target/@nix-restart.sh</dst>
-								</link>
-								<link>
-									<src>${appFolderTarget}/nix-start.sh</src>
-									<dst>${basedir}/target/@nix-start.sh</dst>
-								</link>
-								<link>
-									<src>${appFolderTarget}/nix-stop.sh</src>
-									<dst>${basedir}/target/@nix-stop.sh</dst>
-								</link>
-								<link>
-									<src>${appFolderTarget}</src>
-									<dst>${basedir}/target/@app</dst>
-								</link>
-								<link>
-									<src>${appFolderTarget}/conf</src>
-									<dst>${basedir}/target/@conf</dst>
-								</link>
-								<link>
-									<src>${appFolderTarget}/etc</src>
-									<dst>${basedir}/target/@etc</dst>
-								</link>
-								<link>
-									<src>${appFolderTarget}/lib</src>
-									<dst>${basedir}/target/@lib</dst>
-								</link>
-								<link>
-									<src>${appFolderTarget}/log</src>
-									<dst>${basedir}/target/@log</dst>
-								</link>
-								<link>
-									<src>${appFolderTarget}/system</src>
-									<dst>${basedir}/target/@system</dst>
-								</link>
-							</links>
-						</configuration>
-						<executions>
-							<execution>
-								<id>link-delete</id>
-								<phase>clean</phase>
-								<goals>
-									<goal>unlink</goal>
-								</goals>
-							</execution>
-							<execution>
-								<id>link-create</id>
-								<phase>package</phase>
-								<goals>
-									<goal>link</goal>
-								</goals>
 							</execution>
 						</executions>
 					</plugin>
