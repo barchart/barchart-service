@@ -13,7 +13,7 @@
 
 	<groupId>com.barchart.karaf</groupId>
 	<artifactId>barchart-karaf-service</artifactId>
-	<version>1.1.2-SNAPSHOT</version>
+	<version>1.1.2</version>
 	<packaging>pom</packaging>
 
 	<description>parent for karaf based apps</description>
@@ -22,7 +22,7 @@
 		<url>https://github.com/barchart/barchart-service</url>
 		<connection>scm:git:git://github.com/barchart/barchart-service.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com/barchart/barchart-service.git</developerConnection>
-		<tag>master</tag>
+		<tag>barchart-karaf-service-1.1.2</tag>
 	</scm>
 
 	<properties>
