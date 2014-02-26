@@ -8,7 +8,7 @@
 		<groupId>com.barchart.tanuki</groupId>
 		<artifactId>barchart-tanuki-service</artifactId>
 		<version>2.1.3</version>
-		<relativePath>../barchart-tanuki-service</relativePath>
+		<relativePath>../tanuki/service</relativePath>
 	</parent>
 
 	<groupId>com.barchart.karaf</groupId>
