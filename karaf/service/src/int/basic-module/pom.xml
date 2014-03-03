@@ -8,7 +8,7 @@
 	<parent>
 		<groupId>com.barchart.base</groupId>
 		<artifactId>barchart-archon</artifactId>
-		<version>2.5.6</version>
+		<version>2.6.13</version>
 	</parent>
 
 	<description>basic integration test module; provides main()</description>
