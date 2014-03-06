@@ -31,11 +31,11 @@
 		<serviceUsername>karaf</serviceUsername>
 
 		<!-- Install during karaf feature service boot. -->
-		<karafBootupFeature0>standard</karafBootupFeature0>
-		<karafBootupFeature1>config</karafBootupFeature1>
-		<karafBootupFeature2>eventadmin</karafBootupFeature2>
-		<karafBootupFeature3>scr</karafBootupFeature3>
-		<karafBootupFeature4>ssh</karafBootupFeature4>
+		<karafStartupFeature0>standard</karafStartupFeature0>
+		<karafStartupFeature1>config</karafStartupFeature1>
+		<karafStartupFeature2>eventadmin</karafStartupFeature2>
+		<karafStartupFeature3>scr</karafStartupFeature3>
+		<karafStartupFeature4>ssh</karafStartupFeature4>
 		<karafBootupFeature5>barchart-osgi-deploy</karafBootupFeature5>
 
 		<!-- Integration tests for base app. -->
@@ -54,6 +54,7 @@
 			<artifactId>framework</artifactId>
 			<version>${karafVersion}</version>
 			<type>kar</type>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.karaf.features</groupId>
@@ -61,6 +62,7 @@
 			<version>${karafVersion}</version>
 			<classifier>features</classifier>
 			<type>xml</type>
+			<scope>runtime</scope>
 		</dependency>
 
 		<!-- Runtime dependencies; nothing is used from these, but they
