@@ -24,7 +24,7 @@
 
 		<!-- should be set by developer during interactive work to reflect current 
 			barchart-karaf-base-app -->
-		<integrationVersion>1.5.1-SNAPSHOT</integrationVersion>
+		<integrationVersion>1.5.11-SNAPSHOT</integrationVersion>
 
 		<projectJavaVersion>1.7</projectJavaVersion>
 
