@@ -12,14 +12,14 @@
 	</parent>
 
 	<artifactId>barchart-karaf-base-app</artifactId>
-	<version>1.5.13</version>
+	<version>1.5.14-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<description>Base Karaf Application.</description>
 
 	<scm>
 		<url>https://github.com/barchart/barchart-service</url>
-		<connection>scm:git:git://github.com/barchart/barchart-service.git</connection> <developerConnection>scm:git:ssh://git@github.com/barchart/barchart-service.git</developerConnection> <tag>barchart-karaf-base-app-1.5.13</tag>
+		<connection>scm:git:git://github.com/barchart/barchart-service.git</connection> <developerConnection>scm:git:ssh://git@github.com/barchart/barchart-service.git</developerConnection> <tag>master</tag>
 	</scm>
 
 	<properties>
