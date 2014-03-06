@@ -179,22 +179,6 @@
 						</configuration>
 					</execution>
 
-					<!-- Generate service dependencies feature.xml from pom.xml packaging=bundle. -->
-					<!-- No, dependencies should be specified as feature.xml so assembly
-						goal imports into system repo instead of remote fetching
-					<execution>
-						<id>generate-descriptor</id>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>features-generate-semantic</goal>
-						</goals>
-						<configuration>
-							<installMode>auto</installMode>
-							<outputFile>target/assembly/etc/${serviceFeaturesFile}</outputFile>
-						</configuration>
-					</execution>
-					-->
-
 				</executions>
 
 			</plugin>

@@ -36,7 +36,7 @@
 		<karafStartupFeature2>eventadmin</karafStartupFeature2>
 		<karafStartupFeature3>scr</karafStartupFeature3>
 		<karafStartupFeature4>ssh</karafStartupFeature4>
-		<karafBootupFeature5>barchart-osgi-deploy</karafBootupFeature5>
+		<karafBootupFeature1>barchart-osgi-deploy</karafBootupFeature1>
 
 		<!-- Integration tests for base app. -->
 		<integrationFolder>${basedir}/verify</integrationFolder>
@@ -120,7 +120,10 @@
 						</goals>
 						<configuration>
 							<target>
-								<replace file="${appFolderTarget}/etc/org.apache.karaf.features.cfg" token=",kar," value="," />
+								<!-- Everything's installed in startup repo, no need for default boot features -->
+								<replaceregexp file="${appFolderTarget}/etc/org.apache.karaf.features.cfg"
+									match="(featuresBoot *= *).*"
+									replace="\1${karafBootupFeature1}" />
 							</target>
 						</configuration>
 					</execution>
