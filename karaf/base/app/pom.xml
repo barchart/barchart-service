@@ -48,26 +48,39 @@
 
 		<!-- Around plug-in ordering bug: 1) repeat parent 2) keep in order -->
 
-		<!-- Karaf framework (distribution archive). -->
+		<!-- Karaf core; installed to system repo -->
 		<dependency>
 			<groupId>org.apache.karaf.features</groupId>
 			<artifactId>framework</artifactId>
 			<version>${karafVersion}</version>
 			<type>kar</type>
-			<scope>compile</scope>
 		</dependency>
-
-		<!-- Karaf extensions (feature repository). -->
 		<dependency>
 			<groupId>org.apache.karaf.features</groupId>
 			<artifactId>standard</artifactId>
 			<version>${karafVersion}</version>
 			<classifier>features</classifier>
 			<type>xml</type>
-			<scope>runtime</scope>
 		</dependency>
 
-		<!-- Everything seems to depend on this but it isn't included -->
+		<!-- Runtime dependencies; nothing is used from these, but they
+			need to be included for dependency resolution -->
+		<dependency>
+			<groupId>org.apache.karaf.features</groupId>
+			<artifactId>enterprise</artifactId>
+			<version>${karafVersion}</version>
+			<classifier>features</classifier>
+			<type>xml</type>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.karaf.features</groupId>
+			<artifactId>spring</artifactId>
+			<version>${karafVersion}</version>
+			<classifier>features</classifier>
+			<type>xml</type>
+			<scope>runtime</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.ops4j.pax.web</groupId>
 			<artifactId>pax-web-features</artifactId>
@@ -77,6 +90,7 @@
 			<scope>runtime</scope>
 		</dependency>
 
+		<!-- Barchart features -->
 		<dependency>
 			<groupId>com.barchart.osgi</groupId>
 			<artifactId>barchart-osgi-deploy</artifactId>
