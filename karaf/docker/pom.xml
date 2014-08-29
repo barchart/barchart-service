@@ -12,7 +12,7 @@
 
 	<groupId>com.barchart.karaf</groupId>
 	<artifactId>karaf-docker</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<packaging>karaf-assembly</packaging>
 
 	<description>Base Karaf application for Docker containers</description>
@@ -21,7 +21,7 @@
 		<url>https://github.com/barchart/barchart-service</url>
 		<connection>scm:git:git://github.com/barchart/barchart-service.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com/barchart/barchart-service.git</developerConnection>
-		<tag>master</tag>
+		<tag>karaf-docker-1.0.0</tag>
 	</scm>
 
 	<properties>
@@ -153,10 +153,10 @@
 						<configuration>
 							<target>
 								<copy overwrite="true" todir="${basedir}/target/assembly/etc">
-									<fileset dir="${basedir}/etc"/>
+									<fileset dir="${basedir}/etc" />
 								</copy>
 								<copy overwrite="true" todir="${basedir}/target/assembly/bin">
-									<fileset dir="${basedir}/bin"/>
+									<fileset dir="${basedir}/bin" />
 								</copy>
 								<!-- Everything's installed in startup repo, no need for default boot features -->
 								<replaceregexp file="${basedir}/target/assembly/etc/org.apache.karaf.features.cfg" match="(featuresBoot *= *).*" replace="\1barchart-osgi-deploy" />
