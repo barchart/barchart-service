@@ -12,7 +12,7 @@
 
 	<groupId>com.barchart.karaf</groupId>
 	<artifactId>karaf-docker</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<packaging>karaf-assembly</packaging>
 
 	<description>Base Karaf application for Docker containers</description>
@@ -21,7 +21,7 @@
 		<url>https://github.com/barchart/barchart-service</url>
 		<connection>scm:git:git://github.com/barchart/barchart-service.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com/barchart/barchart-service.git</developerConnection>
-		<tag>karaf-docker-1.0.0</tag>
+		<tag>master</tag>
 	</scm>
 
 	<properties>
