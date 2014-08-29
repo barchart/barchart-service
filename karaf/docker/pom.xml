@@ -25,10 +25,8 @@
 	</scm>
 
 	<properties>
-
 		<projectJavaVersion>1.7</projectJavaVersion>
 		<karafVersion>3.0.0</karafVersion>
-
 	</properties>
 
 	<dependencies>
@@ -104,7 +102,9 @@
 					<!-- Generate distribution archive. -->
 					<execution>
 						<id>generate-distribution</id>
+						<!--
 						<phase>prepare-package</phase>
+						-->
 						<goals>
 							<goal>install-kars</goal>
 						</goals>
@@ -117,6 +117,7 @@
 								<feature>eventadmin</feature>
 								<feature>scr</feature>
 								<feature>ssh</feature>
+								<feature>kar</feature>
 							</startupFeatures>
 
 							<!-- Features to include in org.apache.karaf.features.cfg -->
@@ -144,22 +145,21 @@
 				<artifactId>maven-antrun-plugin</artifactId>
 				<executions>
 					<execution>
-						<id>copy-config</id>
+						<id>copy-conf</id>
 						<phase>prepare-package</phase>
 						<goals>
 							<goal>run</goal>
 						</goals>
 						<configuration>
 							<target>
-								<echo message="${basedir}"/>
-								<copy verbose="true" todir="${basedir}/target/assembly/bin">
-									<fileset dir="${basedir}/bin"/>
-								</copy>
-								<copy verbose="true" todir="${basedir}/target/assembly/etc">
+								<copy overwrite="true" todir="${basedir}/target/assembly/etc">
 									<fileset dir="${basedir}/etc"/>
 								</copy>
+								<copy overwrite="true" todir="${basedir}/target/assembly/bin">
+									<fileset dir="${basedir}/bin"/>
+								</copy>
 								<!-- Everything's installed in startup repo, no need for default boot features -->
-								<replaceregexp file="target/assembly/etc/org.apache.karaf.features.cfg" match="(featuresBoot *= *).*" replace="\1${karafBootupFeature1}" />
+								<replaceregexp file="${basedir}/target/assembly/etc/org.apache.karaf.features.cfg" match="(featuresBoot *= *).*" replace="\1barchart-osgi-deploy" />
 							</target>
 						</configuration>
 					</execution>
