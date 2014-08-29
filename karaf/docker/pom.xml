@@ -1,0 +1,174 @@
+<!-- Copyright (C) 2011-2013 Barchart, Inc. <http://www.barchart.com /> All 
+	rights reserved. Licensed under the OSI BSD License. http://www.opensource.org/licenses/bsd-license.php -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.barchart.base</groupId>
+		<artifactId>barchart-archon</artifactId>
+		<version>2.6.30</version>
+	</parent>
+
+	<groupId>com.barchart.karaf</groupId>
+	<artifactId>karaf-docker</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>karaf-assembly</packaging>
+
+	<description>Base Karaf application for Docker containers</description>
+
+	<scm>
+		<url>https://github.com/barchart/barchart-service</url>
+		<connection>scm:git:git://github.com/barchart/barchart-service.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com/barchart/barchart-service.git</developerConnection>
+		<tag>master</tag>
+	</scm>
+
+	<properties>
+
+		<projectJavaVersion>1.7</projectJavaVersion>
+		<karafVersion>3.0.0</karafVersion>
+
+	</properties>
+
+	<dependencies>
+
+		<!-- Around plug-in ordering bug: 1) repeat parent 2) keep in order -->
+
+		<!-- Karaf core; installed to system repo -->
+		<dependency>
+			<groupId>org.apache.karaf.features</groupId>
+			<artifactId>framework</artifactId>
+			<version>${karafVersion}</version>
+			<type>kar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.karaf.features</groupId>
+			<artifactId>standard</artifactId>
+			<version>${karafVersion}</version>
+			<classifier>features</classifier>
+			<type>xml</type>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- Runtime dependencies; nothing is used from these, but they
+			need to be included for dependency resolution -->
+		<dependency>
+			<groupId>org.apache.karaf.features</groupId>
+			<artifactId>enterprise</artifactId>
+			<version>${karafVersion}</version>
+			<classifier>features</classifier>
+			<type>xml</type>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.karaf.features</groupId>
+			<artifactId>spring</artifactId>
+			<version>${karafVersion}</version>
+			<classifier>features</classifier>
+			<type>xml</type>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ops4j.pax.web</groupId>
+			<artifactId>pax-web-features</artifactId>
+			<version>3.0.5</version>
+			<classifier>features</classifier>
+			<type>xml</type>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- Barchart features -->
+		<dependency>
+			<groupId>com.barchart.osgi</groupId>
+			<artifactId>barchart-osgi-deploy</artifactId>
+			<version>[1.0-SNAPSHOT,2.0-SNAPSHOT)</version>
+			<classifier>features</classifier>
+			<type>xml</type>
+			<scope>runtime</scope>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+
+		<plugins>
+
+			<!-- Extract distribution archive and generate feature descriptor. -->
+			<plugin>
+				<groupId>org.apache.karaf.tooling</groupId>
+				<artifactId>karaf-maven-plugin</artifactId>
+				<executions>
+
+					<!-- Generate distribution archive. -->
+					<execution>
+						<id>generate-distribution</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>install-kars</goal>
+						</goals>
+						<configuration>
+
+							<!-- Features to include in startup.properties. -->
+							<startupFeatures>
+								<feature>standard</feature>
+								<feature>config</feature>
+								<feature>eventadmin</feature>
+								<feature>scr</feature>
+								<feature>ssh</feature>
+							</startupFeatures>
+
+							<!-- Features to include in org.apache.karaf.features.cfg -->
+							<bootFeatures>
+								<feature>barchart-osgi-deploy</feature>
+							</bootFeatures>
+
+							<!-- Features to include in ${karaf.base}/system repository -->
+							<!-- Extend in subproject
+							<installedFeatures>
+								<feature>my-feature-name</feature>
+							</installedFeatures>
+							-->
+
+						</configuration>
+					</execution>
+
+				</executions>
+
+			</plugin>
+
+			<plugin>
+
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-config</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target>
+								<echo message="${basedir}"/>
+								<copy verbose="true" todir="${basedir}/target/assembly/bin">
+									<fileset dir="${basedir}/bin"/>
+								</copy>
+								<copy verbose="true" todir="${basedir}/target/assembly/etc">
+									<fileset dir="${basedir}/etc"/>
+								</copy>
+								<!-- Everything's installed in startup repo, no need for default boot features -->
+								<replaceregexp file="target/assembly/etc/org.apache.karaf.features.cfg" match="(featuresBoot *= *).*" replace="\1${karafBootupFeature1}" />
+							</target>
+						</configuration>
+					</execution>
+				</executions>
+
+			</plugin>
+            
+		</plugins>
+
+	</build>
+
+</project>

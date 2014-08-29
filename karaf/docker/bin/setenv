@@ -1,0 +1,109 @@
+#!/bin/sh
+#
+#    Licensed to the Apache Software Foundation (ASF) under one or more
+#    contributor license agreements.  See the NOTICE file distributed with
+#    this work for additional information regarding copyright ownership.
+#    The ASF licenses this file to You under the Apache License, Version 2.0
+#    (the "License"); you may not use this file except in compliance with
+#    the License.  You may obtain a copy of the License at
+#
+#       http://www.apache.org/licenses/LICENSE-2.0
+#
+#    Unless required by applicable law or agreed to in writing, software
+#    distributed under the License is distributed on an "AS IS" BASIS,
+#    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#    See the License for the specific language governing permissions and
+#    limitations under the License.
+#
+
+#
+# handle specific scripts; the SCRIPT_NAME is exactly the name of the Karaf
+# script; for example karaf, start, stop, admin, client, ...
+#
+# if [ "$KARAF_SCRIPT" == "SCRIPT_NAME" ]; then
+#   Actions go here...
+# fi
+
+#
+# general settings which should be applied for all scripts go here; please keep
+# in mind that it is possible that scripts might be executed more than once, e.g.
+# in example of the start script where the start script is executed first and the
+# karaf script afterwards.
+#
+
+# From Cassandra startup scripts
+calculate_heap_sizes() {
+
+	system_memory_in_mb=`free -m | awk '/Mem:/ {print $2}'`
+	system_cpu_cores=`egrep -c 'processor([[:space:]]+):.*' /proc/cpuinfo`
+
+    # some systems like the raspberry pi don't report cores, use at least 1
+    if [ "$system_cpu_cores" -lt "1" ]
+    then
+        system_cpu_cores="1"
+    fi
+
+    # set max heap size based on the following
+    # max(min(1/2 ram, 1024MB), min(1/4 ram, 8GB))
+    # calculate 1/2 ram and cap to 1024MB
+    # calculate 1/4 ram and cap to 8192MB
+    # pick the max
+    quarter_system_memory_in_mb=`expr $system_memory_in_mb / 4`
+	max_heap_size_in_mb=`expr $system_memory_in_mb - $quarter_system_memory_in_mb`
+    if [ "$max_heap_size_in_mb" -gt "8192" ]
+    then
+        max_heap_size_in_mb="8192"
+    fi
+    MAX_HEAP_SIZE="${max_heap_size_in_mb}M"
+
+    # Young gen: min(max_sensible_per_modern_cpu_core * num_cores, 1/4 * heap size)
+    max_sensible_yg_per_core_in_mb="100"
+    max_sensible_yg_in_mb=`expr $max_sensible_yg_per_core_in_mb "*" $system_cpu_cores`
+
+    desired_yg_in_mb=`expr $max_heap_size_in_mb / 4`
+
+    if [ "$desired_yg_in_mb" -gt "$max_sensible_yg_in_mb" ]
+    then
+        MAX_NEW_SIZE="${max_sensible_yg_in_mb}M"
+    else
+        MAX_NEW_SIZE="${desired_yg_in_mb}M"
+    fi
+}
+
+calculate_heap_sizes
+
+#
+# The following section shows the possible configuration options for the default 
+# karaf scripts
+#
+# export JAVA_HOME # Location of Java installation
+export JAVA_MIN_MEM=$MAX_HEAP_SIZE
+export JAVA_MAX_MEM=$MAX_HEAP_SIZE
+export JAVA_PERM_MEM=100m
+export JAVA_MAX_PERM_MEM=100m
+export KARAF_HOME=/var/karaf
+# export KARAF_DATA # Karaf data folder
+# export KARAF_BASE # Karaf base folder
+# export KARAF_ETC  # Karaf etc  folder
+export KARAF_OPTS="-Dkaraf.startLocalConsole=false -Dkaraf.startRemoteShell=true"
+# export KARAF_DEBUG # Enable debug mode
+
+export JAVA_OPTS="-server \
+	-Xms$JAVA_MIN_MEM \
+	-Xmx$JAVA_MAX_MEM \
+	-XX:PermSize=$JAVA_PERM_MEM \
+	-XX:MaxPermSize=$JAVA_MAX_PERM_MEM \
+	-XX:NewSize=$MAX_NEW_SIZE \
+	-XX:MaxNewSize=$MAX_NEW_SIZE \
+	-Dcom.sun.management.jmxremote \
+	-Xloggc:$KARAF_HOME/log/gc.log \
+	-XX:+PrintGCDetails \
+	-XX:+PrintGCTimeStamps \
+	-XX:SurvivorRatio=2 \
+	-XX:+UseParNewGC \
+	-XX:ParallelGCThreads=2 \
+	-XX:+UseConcMarkSweepGC \
+	-XX:ParallelCMSThreads=1 \
+	-XX:+UseCMSInitiatingOccupancyOnly \
+	-XX:CMSInitiatingOccupancyFraction=80 \
+	-XX:TargetSurvivorRatio=90"
