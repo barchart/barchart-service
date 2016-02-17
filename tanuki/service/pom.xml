@@ -1,4 +1,4 @@
-<!-- Copyright (C) 2011-2013 Barchart, Inc. <http://www.barchart.com /> All 
+<!-- Copyright (C) 2011-2013 Barchart, Inc. <http://www.barchart.com /> All
 	rights reserved. Licensed under the OSI BSD License. http://www.opensource.org/licenses/bsd-license.php -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
@@ -26,13 +26,13 @@
 	<properties>
 
 		<!-- you SHOULD override template version in your project -->
-		<templateVersion>3.5.20-build002</templateVersion>
+		<templateVersion>3.5.27-build007-SNAPSHOT</templateVersion>
 
-		<!-- you CAN override this path in order to use non-default java executable, 
+		<!-- you CAN override this path in order to use non-default java executable,
 			such as: java32, java64, java7x32, java7x64; -->
 		<javaCommand>java</javaCommand>
 
-		<!-- you CAN override these parameters passed to the java JVM; do not remove 
+		<!-- you CAN override these parameters passed to the java JVM; do not remove
 			empty entries; -->
 
 		<javaParameter0 />
@@ -61,11 +61,11 @@
 		<javaParameter23 />
 		<javaParameter24 />
 
-		<!-- you MUST override this to provide "public static void main(...)" for 
+		<!-- you MUST override this to provide "public static void main(...)" for
 			java -->
 		<mainClass>you-must-override-mainClass-in-pom</mainClass>
 
-		<!-- you CAN override these parameters passed to the mainClass; do not 
+		<!-- you CAN override these parameters passed to the mainClass; do not
 			remove empty entries; -->
 
 		<mainParameter0 />
@@ -492,7 +492,7 @@
 
 		<pluginManagement>
 			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings 
+				<!--This plugin's configuration is used to store Eclipse m2e settings
 					only. It has no influence on the Maven build itself. -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>

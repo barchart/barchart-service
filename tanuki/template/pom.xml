@@ -1,4 +1,4 @@
-<!-- Copyright (C) 2011-2013 Barchart, Inc. <http://www.barchart.com /> All 
+<!-- Copyright (C) 2011-2013 Barchart, Inc. <http://www.barchart.com /> All
 	rights reserved. Licensed under the OSI BSD License. http://www.opensource.org/licenses/bsd-license.php -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
@@ -11,18 +11,18 @@
 		<relativePath />
 	</parent>
 
-	<!-- note: use original tanuki version as the first maven version term; 
+	<!-- note: use original tanuki version as the first maven version term;
 		it will be used as ${distroVersion} for tanuki download -->
 	<groupId>com.barchart.tanuki</groupId>
 	<artifactId>barchart-tanuki-service-template</artifactId>
-        <version>3.5.20-build007-SNAPSHOT</version>
+        <version>3.5.27-build007-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<scm>
 		<url>https://github.com/barchart/barchart-service</url>
 		<connection>scm:git:git://github.com/barchart/barchart-service.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com/barchart/barchart-service.git</developerConnection>
-		<tag>HEAD</tag>	
+		<tag>HEAD</tag>
 	</scm>
 
 	<description>folder layout for java-service-wrapper based applications</description>
@@ -172,7 +172,7 @@
 
 		<pluginManagement>
 			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings 
+				<!--This plugin's configuration is used to store Eclipse m2e settings
 					only. It has no influence on the Maven build itself. -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
