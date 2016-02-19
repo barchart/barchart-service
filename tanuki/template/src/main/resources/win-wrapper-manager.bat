@@ -57,9 +57,13 @@ rem detect cpu architecture
 
 set WRAPPER_X=%WRAPPER_NAME%-windows-x86
 
-if /i "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto :ARCH_X64
-if /i "%PROCESSOR_ARCHITEW6432%"=="AMD64" goto :ARCH_X64
+#
+# The community edition does not come with x64 support, so workaround it.
+#
+if /i "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto :ARCH_X32
+if /i "%PROCESSOR_ARCHITEW6432%"=="AMD64" goto :ARCH_X32
 if /i "%PROCESSOR_ARCHITECTURE%"=="X86"   goto :ARCH_X32
+if /i "%PROCESSOR_ARCHITECTURE%"=="X64"   goto :ARCH_X32
 echo ERROR: Can not detect PROCESSOR_ARCHITECTURE.
 pause
 goto :EOF
