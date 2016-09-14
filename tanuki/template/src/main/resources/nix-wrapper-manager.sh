@@ -111,6 +111,7 @@ DETAIL_STATUS=true
 #  port needs to be allocated prior to the user being changed.
 #
 RUN_AS_USER="${serviceUsername}"
+RUN_AS_USER_UNIX="${serviceUsernameUnix}"
 
 #-----------------------------------------------------------------------------
 #--- no more maven variables beyond this point -------------------------------
@@ -271,6 +272,14 @@ pid=""
 
 # Resolve the os
 DIST_OS=`uname -s | tr [:upper:] [:lower:] | tr -d [:blank:]`
+
+# Switch user based on OS type
+case "$DIST_OS" in
+    'linux')
+    RUN_AS_USER="${RUN_AS_USER_UNIX}"
+    ;;
+esac
+log "Using run user: ${RUN_AS_USER}"
 
 # wrapper bin naming conventions
 case "$DIST_OS" in
